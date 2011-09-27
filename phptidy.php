@@ -1103,7 +1103,7 @@ function fix_separation_whitespace(&$tokens) {
 				if ( $tokens[$key+1] === "(" ) {
 					// Insert an additional space or newline before the bracket
 					array_splice($tokens, $key+1, 0, array(
-							array(T_WHITESPACE, separation_whitespace(T_SWITCH)),
+							array(T_WHITESPACE, separation_whitespace($token[0])),
 						));
 				}
 				break;
@@ -1113,14 +1113,14 @@ function fix_separation_whitespace(&$tokens) {
 				if ( $tokens[$key+1] === "{" ) {
 					// Insert an additional space or newline before the bracket
 					array_splice($tokens, $key+1, 0, array(
-							array(T_WHITESPACE, separation_whitespace(T_DO)),
+							array(T_WHITESPACE, separation_whitespace($token[0])),
 						));
 				} elseif (
 					isset($tokens[$key+1][0]) and $tokens[$key+1][0] === T_WHITESPACE and
 					isset($tokens[$key+2]) and $tokens[$key+2] === "{"
 				) {
 					// Set the existing whitespace before the bracket to exactly one space or a newline
-					$tokens[$key+1][1] = separation_whitespace(T_DO);
+					$tokens[$key+1][1] = separation_whitespace($token[0]);
 				}
 				break;
 			default:
