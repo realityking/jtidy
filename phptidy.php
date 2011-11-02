@@ -93,6 +93,7 @@ $replace_shell_comments = true;
 $fix_statement_brackets = true;
 $fix_separation_whitespace = true;
 $fix_comma_space = true;
+$use_elseif = true;
 $add_file_docblock = true;
 $add_function_docblocks = true;
 $add_doctags = true;
@@ -433,6 +434,8 @@ function phptidy($source) {
 	if ($GLOBALS['fix_statement_brackets']) fix_statement_brackets($tokens);
 	if ($GLOBALS['fix_separation_whitespace']) fix_separation_whitespace($tokens);
 	if ($GLOBALS['fix_comma_space']) fix_comma_space($tokens);
+
+	if ($GLOBALS['use_elseif']) fix_use_elseif($tokens);
 
 	// PhpDocumentor
 	if ($GLOBALS['add_doctags']) {
@@ -837,6 +840,28 @@ function replace_inline_tabs(&$tokens) {
 
 	}
 
+}
+
+/**
+ * Replaces else if with elseif
+ *
+ * @param array   $tokens (reference)
+ */
+function fix_use_elseif(&$tokens) {
+
+	foreach ($tokens as $key => &$token) {
+		if ($token[0] == T_ELSE) {
+			for($i = $key+1; $i < count($tokens); $i++) {
+				if ($tokens[$i][0] === T_IF) {
+					echo "found";
+					array_splice($tokens, $key, $i-$key+1, array(T_ELSEIF, "elseif"));
+					break;
+				} elseif ($tokens[$i][0] !== T_WHITESPACE) {
+					break;
+				}
+			}
+		}
+	}
 }
 
 
