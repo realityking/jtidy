@@ -1710,7 +1710,9 @@ function indent_text(&$tokens, $key, $curly_braces_count, $extra_indentation, $r
 			".",
 			array(T_CONCAT_EQUAL, ".="),
 			// type
-			array(T_INSTANCEOF, "instanceof")
+			array(T_INSTANCEOF, "instanceof"),
+			// object
+			array(T_OBJECT_OPERATOR, "->")
 		);
 
 		if (
