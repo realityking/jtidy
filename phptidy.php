@@ -1133,6 +1133,7 @@ function fix_separation_whitespace(&$tokens) {
 				break;
 			case T_ELSE:
 			case T_DO:
+			case T_TRY:
 				// Exactly 1 space between a command and a opening curly bracket
 				if ( $tokens[$key+1] === "{" ) {
 					// Insert an additional space or newline before the bracket
