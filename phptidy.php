@@ -982,7 +982,6 @@ function fix_statement_brackets(&$tokens) {
 		T_INCLUDE_ONCE,
 		T_REQUIRE,
 		T_REQUIRE_ONCE,
-		T_RETURN,
 		T_BREAK,
 		T_CONTINUE,
 		T_ECHO
